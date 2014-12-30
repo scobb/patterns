@@ -29,7 +29,9 @@ class PatternEntry(object):
         return self.building
 
     def compare(self, letter, index):
-        if index >= len(self.pattern):
+        if self.pattern == '':
+            return True
+        elif index >= len(self.pattern):
             return False
         return self.pattern[index] == letter
 
