@@ -36,19 +36,11 @@ def find_pattern(pattern, phrase, dictionary, pattern_ind, phrase_ind, inner_pat
         print(str(dictionary))
     if phrase_ind == len(phrase):
         if pattern_ind == len(pattern) - 1 and inner_pattern_ind == len(dictionary[pattern[pattern_ind]]):
-            if debug:
-                print(str(dictionary))
-                # print('pattern_ind: %d, len(pattern)-1: %d' % (pattern_ind, len(pattern)-1))
-                # print('inner_pattern_ind: %d, len(...): %d' % (inner_pattern_ind, len(dictionary[pattern[pattern_ind]])))
-            check = ''
+            sent = ''
             for letter in pattern:
-                check += dictionary[letter].pattern
-            if phrase == check:
-                sent = ''
-                for letter in pattern:
-                    sent += dictionary[letter].pattern + ' '
-                print(sent)
-            return phrase == check
+                sent += dictionary[letter].pattern + ' '
+            print(sent)
+            return True
         else:
             return False
     if pattern_ind == len(pattern):
