@@ -30,8 +30,11 @@ def find_pattern(pattern, phrase, dictionary, pattern_ind, phrase_ind, inner_pat
     """
     dictionary = deepcopy(dictionary)
     if phrase_ind == len(phrase):
+        # print(str(dictionary))
+        # print('pattern_ind: %d, len(pattern)-1: %d' % (pattern_ind, len(pattern)-1))
+        # print('inner_pattern_ind: %d, len(...): %d' % (inner_pattern_ind, len(dictionary[pattern[pattern_ind]])))
         if pattern_ind == len(pattern) - 1 and inner_pattern_ind == len(dictionary[pattern[pattern_ind]]):
-
+            # print('inside')
             check = ''
             for letter in pattern:
                 check += dictionary[letter].pattern
@@ -65,11 +68,11 @@ def find_pattern(pattern, phrase, dictionary, pattern_ind, phrase_ind, inner_pat
     else:
         # checking against an existing pattern
         if not dictionary[pattern[pattern_ind]].compare(phrase[phrase_ind], inner_pattern_ind):
+            # doesn't work; just return next.
             return next
-        inner_pattern_ind += 1
 
-    # check go to next letter
-    current = find_pattern(pattern, phrase, dictionary, pattern_ind, phrase_ind + 1, inner_pattern_ind)
+    # check for current pattern passed; go to next letter in phrase.
+    current = find_pattern(pattern, phrase, dictionary, pattern_ind, phrase_ind + 1, inner_pattern_ind + 1)
     return next or current
 
 
