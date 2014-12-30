@@ -2,19 +2,22 @@ from copy import deepcopy
 
 __author__ = 'scobb'
 from pattern import PatternEntry
+debug = False
 
 
 def main():
     in_file = 'sample.in'
     f = open(in_file)
     pattern = f.readline().strip()
-    print('pattern: %s' % pattern)
     phrase = f.readline().strip()
-    print('phrase: %s' % phrase)
+    if debug:
+        print('pattern: %s' % pattern)
+        print('phrase: %s' % phrase)
     f.close()
 
     val = find_pattern(pattern, phrase, {}, 0, 0, 0)
-    print(str(val))
+    if debug:
+        print(str(val))
 
 
 def find_pattern(pattern, phrase, dictionary, pattern_ind, phrase_ind, inner_pattern_ind):
@@ -30,11 +33,11 @@ def find_pattern(pattern, phrase, dictionary, pattern_ind, phrase_ind, inner_pat
     """
     dictionary = deepcopy(dictionary)
     if phrase_ind == len(phrase):
-        # print(str(dictionary))
-        # print('pattern_ind: %d, len(pattern)-1: %d' % (pattern_ind, len(pattern)-1))
-        # print('inner_pattern_ind: %d, len(...): %d' % (inner_pattern_ind, len(dictionary[pattern[pattern_ind]])))
+        if debug:
+            print(str(dictionary))
+            print('pattern_ind: %d, len(pattern)-1: %d' % (pattern_ind, len(pattern)-1))
+            print('inner_pattern_ind: %d, len(...): %d' % (inner_pattern_ind, len(dictionary[pattern[pattern_ind]])))
         if pattern_ind == len(pattern) - 1 and inner_pattern_ind == len(dictionary[pattern[pattern_ind]]):
-            # print('inside')
             check = ''
             for letter in pattern:
                 check += dictionary[letter].pattern
